@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Maturity Assessment</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font and modern design principles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray background */
+        }
+        /* Custom radio button styling */
+        .radio-label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            flex-grow: 1;
+            text-align: center;
+            justify-content: center;
+            font-size: 0.875rem; /* text-sm */
+        }
+        .radio-label:hover {
+            background-color: #f3f4f6;
+            border-color: #a5b4fc; /* indigo-300 */
+        }
+        .radio-input {
+            /* Hide the default radio button */
+            appearance: none; 
+            -webkit-appearance: none;
+            margin-right: 0.5rem;
+        }
+        /* Style when the radio button is checked */
+        .radio-input:checked + .radio-label {
+            background-color: #eef2ff; /* indigo-50 */
+            border-color: #6366f1; /* indigo-500 */
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            font-weight: 600;
+            color: #4338ca; /* indigo-700 */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Card Container -->
+    <div id="survey-container" class="w-full max-w-3xl bg-white shadow-2xl rounded-xl p-8 md:p-12 transition-all duration-500">
+
+        <header class="mb-8 border-b pb-4">
+            <h1 class="text-3xl font-extrabold text-gray-800">Digital Backbone Assessment</h1>
+            <p id="survey-subtitle" class="text-lg text-indigo-600 mt-2 font-medium">Step 1: Introduction</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="mb-8">
+            <div class="h-2 bg-gray-200 rounded-full">
+                <div id="progress-bar" class="h-2 bg-indigo-500 rounded-full transition-all duration-500 ease-out" style="width: 10%;"></div>
+            </div>
+            <div id="progress-text" class="text-sm text-gray-500 mt-2 text-right">10% Complete</div>
+        </div>
+        
+        <!-- Form Content - All steps are hidden by default, except the first one -->
+        <form id="maturity-form">
+            
+            <!-- STEP 1: Introduction -->
+            <section id="step-1" class="survey-step">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Welcome to the Assessment</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    This quick 5-minute assessment will help you evaluate your company's digital maturity across five key areas: Strategy, Technology, Process, Culture, and Customer Experience. Your results will be delivered instantly!
+                </p>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="company-name" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                        <input type="text" id="company-name" placeholder="Acme Logistics Inc." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="industry" class="block text-sm font-medium text-gray-700 mb-1">Industry Sector</label>
+                        <select id="industry" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 bg-white" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="freight">Freight Forwarding</option>
+                            <option value="warehouse">Warehousing</option>
+                            <option value="transport">Inland Transport</option>
+                            <option value="other">Other Logistics</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 2: Core Questions (Likert Scale) -->
+            <section id="step-2" class="survey-step hidden">
+                <h2 class="text-2xl font-semibold mb-6 text-gray-700">Digital Strategy & Technology</h2>
+                
+                <div class="space-y-8">
+                    <!-- Question 1: Strategy -->
+                    <fieldset class="border border-gray-200 p-4 rounded-lg shadow-sm">
+                        <legend class="text-base font-semibold text-gray-700 mb-3">1. Our digital strategy is clearly defined, documented, and communicated across the organization.</legend>
+                        <div class="flex flex-col sm:flex-row justify-between space-y-3 sm:space-y-0 sm:space-x-4">
+                            <label class="radio-label">
+                                <input type="radio" name="q1" value="1" required class="radio-input"> Strongly Disagree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q1" value="2" class="radio-input"> Disagree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q1" value="3" class="radio-input"> Neutral
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q1" value="4" class="radio-input"> Agree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q1" value="5" class="radio-input"> Strongly Agree
+                            </label>
+                        </div>
+                    </fieldset>
+                    
+                    <!-- Question 2: Technology -->
+                    <fieldset class="border border-gray-200 p-4 rounded-lg shadow-sm">
+                        <legend class="text-base font-semibold text-gray-700 mb-3">2. Our core systems (e.g., TMS, WMS, ERP) are fully integrated and share data seamlessly.</legend>
+                        <div class="flex flex-col sm:flex-row justify-between space-y-3 sm:space-y-0 sm:space-x-4">
+                            <label class="radio-label">
+                                <input type="radio" name="q2" value="1" required class="radio-input"> Strongly Disagree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q2" value="2" class="radio-input"> Disagree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q2" value="3" class="radio-input"> Neutral
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q2" value="4" class="radio-input"> Agree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q2" value="5" class="radio-input"> Strongly Agree
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <!-- Question 3: Process -->
+                    <fieldset class="border border-gray-200 p-4 rounded-lg shadow-sm">
+                        <legend class="text-base font-semibold text-gray-700 mb-3">3. At least 70% of our invoicing and documentation processes are automated.</legend>
+                        <div class="flex flex-col sm:flex-row justify-between space-y-3 sm:space-y-0 sm:space-x-4">
+                            <label class="radio-label">
+                                <input type="radio" name="q3" value="1" required class="radio-input"> Strongly Disagree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q3" value="2" class="radio-input"> Disagree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q3" value="3" class="radio-input"> Neutral
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q3" value="4" class="radio-input"> Agree
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="q3" value="5" class="radio-input"> Strongly Agree
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+            </section>
+
+            <!-- STEP 3: Contact & Submit -->
+            <section id="step-3" class="survey-step hidden">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Get Your Personalized Report</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    Enter your email to receive a detailed breakdown of your maturity score and custom recommendations.
+                </p>
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="full-name" placeholder="John Smith" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="email" placeholder="john.smith@company.com" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Thank You / Results Message (Hidden by default) -->
+            <section id="results-message" class="hidden text-center py-16">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500 mx-auto mb-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <h2 class="text-3xl font-bold text-gray-800 mb-3">Thank You! Assessment Complete.</h2>
+                <p class="text-xl text-gray-600 mb-6">Your personalized Digital Maturity Report is being generated and will be saved for our team review.</p>
+                <button type="button" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300" onclick="window.location.reload()">
+                    Start New Assessment
+                </button>
+            </section>
+
+
+            <!-- Navigation Buttons -->
+            <div id="navigation-buttons" class="mt-8 pt-6 border-t flex justify-between">
+                <button type="button" id="back-button" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition duration-300 hidden">
+                    &larr; Back
+                </button>
+                <button type="button" id="next-button" class="ml-auto px-6 py-3 bg-indigo-500 rounded-lg text-white font-semibold shadow-md hover:bg-indigo-600 transition duration-300">
+                    Next Step &rarr;
+                </button>
+                <button type="submit" id="submit-button" class="ml-auto px-6 py-3 bg-green-500 rounded-lg text-white font-semibold shadow-md hover:bg-green-600 transition duration-300 hidden flex items-center justify-center">
+                    <span id="submit-text">Submit & Save Results</span>
+                    <svg id="submit-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+            </div>
+            
+        </form>
+
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, addDoc, collection, setDoc, serverTimestamp, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Firebase variables (provided by the environment)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth;
+        let isFirebaseReady = false;
+
+        if (firebaseConfig) {
+            // Set up Firebase
+            setLogLevel('Debug');
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            // Sign in handler
+            const signIn = async () => {
+                try {
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Firebase Auth Error:", error);
+                }
+            };
+
+            // Set up listener and sign in
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    isFirebaseReady = true;
+                    console.log("Firebase Ready. User ID:", user.uid);
+                } else {
+                    signIn();
+                }
+            });
+        } else {
+            console.error("Firebase configuration is missing. Data cannot be saved.");
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const steps = document.querySelectorAll('.survey-step');
+            const form = document.getElementById('maturity-form');
+            const backButton = document.getElementById('back-button');
+            const nextButton = document.getElementById('next-button');
+            const submitButton = document.getElementById('submit-button');
+            const submitText = document.getElementById('submit-text');
+            const submitSpinner = document.getElementById('submit-spinner');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const subtitle = document.getElementById('survey-subtitle');
+            const navigationButtons = document.getElementById('navigation-buttons');
+            const resultsMessage = document.getElementById('results-message');
+
+            let currentStep = 0;
+            const stepTitles = [
+                "Step 1: Introduction",
+                "Step 2: Core Assessment",
+                "Step 3: Final Details"
+            ];
+            const totalSteps = steps.length;
+
+            /**
+             * Updates the visibility of the current step and navigation buttons.
+             */
+            function showStep(stepIndex) {
+                // Hide all steps
+                steps.forEach((step, index) => {
+                    step.classList.add('hidden');
+                    if (index === stepIndex) {
+                        step.classList.remove('hidden');
+                    }
+                });
+
+                // Update navigation buttons
+                backButton.classList.toggle('hidden', stepIndex === 0);
+                nextButton.classList.toggle('hidden', stepIndex === totalSteps - 1);
+                submitButton.classList.toggle('hidden', stepIndex !== totalSteps - 1);
+
+                // Update progress bar
+                const percentage = ((stepIndex + 1) / totalSteps) * 100;
+                progressBar.style.width = `${percentage}%`;
+                progressText.textContent = `${Math.round(percentage)}% Complete`;
+                
+                // Update subtitle
+                subtitle.textContent = stepTitles[stepIndex];
+                currentStep = stepIndex;
+            }
+            
+            /**
+             * Checks if all required fields in the current step are valid.
+             */
+            function isStepValid(stepIndex) {
+                const currentSection = steps[stepIndex];
+                const requiredInputs = currentSection.querySelectorAll('[required]');
+                let isValid = true;
+                
+                for (const input of requiredInputs) {
+                    if (input.type === 'radio') {
+                        // For radio buttons, check if any option in the group is checked
+                        const groupName = input.name;
+                        const isChecked = currentSection.querySelector(`input[name="${groupName}"]:checked`);
+                        if (!isChecked) {
+                            console.error(`Validation Error: Please select an option for question group: ${groupName}`);
+                            isValid = false;
+                            break;
+                        }
+                    } else if (!input.value) {
+                        // Check if text/select inputs have a value
+                        input.focus(); 
+                        isValid = false;
+                        break;
+                    }
+                }
+                
+                if (!isValid) {
+                    // Simple in-app feedback (replace with a custom modal if needed)
+                    alert("Please fill out all required fields to continue.");
+                }
+                return isValid;
+            }
+
+            // --- Event Listeners ---
+
+            backButton.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    showStep(currentStep - 1);
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                if (isStepValid(currentStep) && currentStep < totalSteps - 1) {
+                    showStep(currentStep + 1);
+                }
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!isStepValid(currentStep)) return;
+
+                if (!isFirebaseReady) {
+                    console.error("Database not ready. Please wait a moment and try again.");
+                    alert("The submission service is still initializing. Please wait a few seconds and try clicking 'Submit' again.");
+                    return;
+                }
+
+                // Show loading state
+                submitText.classList.add('hidden');
+                submitSpinner.classList.remove('hidden');
+                submitButton.disabled = true;
+
+                try {
+                    // 1. Collect Data
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+                    
+                    // Add specific fields
+                    data.companyName = document.getElementById('company-name').value;
+                    data.industry = document.getElementById('industry').value;
+                    data.fullName = document.getElementById('full-name').value;
+                    data.email = document.getElementById('email').value;
+                    data.submissionTime = serverTimestamp();
+                    data.userId = auth.currentUser.uid; // Store the ID of the submitting user
+                    
+                    // 2. Determine Firestore path (Public data for shared analysis)
+                    const collectionPath = `/artifacts/${appId}/public/data/assessments`;
+                    
+                    // 3. Save to Firestore
+                    await addDoc(collection(db, collectionPath), data);
+                    
+                    console.log("Survey data successfully saved to Firestore:", data);
+
+                    // Show the results message and hide the form content
+                    steps.forEach(step => step.classList.add('hidden'));
+                    navigationButtons.classList.add('hidden');
+                    document.querySelector('header').classList.add('hidden');
+                    document.querySelector('.h-2.bg-gray-200').classList.add('hidden'); 
+                    document.getElementById('progress-text').classList.add('hidden'); 
+                    resultsMessage.classList.remove('hidden');
+
+                } catch (error) {
+                    console.error("Error saving data to Firestore:", error);
+                    alert("Sorry, an error occurred while submitting your assessment. Please check the console for details.");
+                } finally {
+                    // Reset loading state
+                    submitText.classList.remove('hidden');
+                    submitSpinner.classList.add('hidden');
+                    submitButton.disabled = false;
+                }
+            });
+
+            // Initial load: show the first step
+            showStep(0);
+        });
+    </script>
+</body>
+</html>
